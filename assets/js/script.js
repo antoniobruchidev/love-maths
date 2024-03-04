@@ -65,7 +65,7 @@ function calcolateCorrectAnswer() {
 }
 
 function incrementScore() {
-    let score = parseInt(document.getElementById("scores").innerText);
+    let score = parseInt(document.getElementById("score").innerText);
     score++;
     document.getElementById("scores").innerText = score;
 }
