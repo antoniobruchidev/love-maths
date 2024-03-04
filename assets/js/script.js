@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         operator = "-";
                         break;
                     case "multiply":
-                        operator = "*";
+                        operator = "x";
                         break;
                     case "division":
                         operator = "/";
@@ -45,7 +45,9 @@ function checkAnswer() {
         alert(`Aww... You answered ${answer}, but the correct on is ${correctAnswer}`);
         incrementWrongAnswer();
     }
-
+    document.getElementsByTagName('input')[0].value = null;
+    let gameType = document.getElementById("operator").textContent;
+    runGame(gameType);
 }
 
 function calcolateCorrectAnswer() {
@@ -57,7 +59,7 @@ function calcolateCorrectAnswer() {
             return operand1 + operand2;
         case "-":
             return operand1 - operand2;
-        case "*":
+        case "x":
             return operand1 * operand2;
         case "/":
             return Math.floor(operand1 / operand2);
@@ -67,7 +69,7 @@ function calcolateCorrectAnswer() {
 function incrementScore() {
     let score = parseInt(document.getElementById("score").innerText);
     score++;
-    document.getElementById("scores").innerText = score;
+    document.getElementById("score").innerText = score;
 }
 
 function incrementWrongAnswer() {
@@ -77,7 +79,12 @@ function incrementWrongAnswer() {
 }
 
 function displayQuestion(operand1, operand2, operator) {
-    document.getElementById("operand1").textContent = operand1;
-    document.getElementById("operand2").textContent = operand2;
     document.getElementById("operator").textContent = operator;
+    if(operand1 < operand2) {
+        document.getElementById("operand1").textContent = operand2;
+        document.getElementById("operand2").textContent = operand1;
+    } else {
+        document.getElementById("operand1").textContent = operand1;
+        document.getElementById("operand2").textContent = operand2;
+    }
 }
