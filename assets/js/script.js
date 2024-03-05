@@ -29,9 +29,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
+document.getElementById('answer-box').addEventListener("keydown", function(event) {
+    if (event.key === "Enter" && document.getElementById("answer-box").value !== null) {
+        checkAnswer();
+    }
+})
+
 function runGame(operator) {
     let num1 = Math.floor(Math.random() * 25 + 1);
     let num2 = Math.floor(Math.random() * 25 + 1);
+    console.log(num1, num2, operator);
+    if(operator === "/") {
+        num1 = num1 * num2;
+    }
+    console.log(num1, num2, operator);
     displayQuestion(num1, num2, operator); 
 }
 
@@ -46,8 +57,8 @@ function checkAnswer() {
         incrementWrongAnswer();
     }
     document.getElementsByTagName('input')[0].value = null;
-    let gameType = document.getElementById("operator").textContent;
-    runGame(gameType);
+    let operator = document.getElementById("operator").textContent;
+    runGame(operator);
 }
 
 function calcolateCorrectAnswer() {
@@ -62,7 +73,7 @@ function calcolateCorrectAnswer() {
         case "x":
             return operand1 * operand2;
         case "/":
-            return Math.floor(operand1 / operand2);
+            return operand1 / operand2;
     }
 }
 
@@ -87,4 +98,5 @@ function displayQuestion(operand1, operand2, operator) {
         document.getElementById("operand1").textContent = operand1;
         document.getElementById("operand2").textContent = operand2;
     }
-}
+    document.getElementById("answer-box").focus();
+} 
